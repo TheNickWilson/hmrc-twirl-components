@@ -1,6 +1,6 @@
 import play.core.PlayVersion
 
-name := "twirl-stuff"
+name := "hmrc-twirl-components"
 
 version := "0.1"
 
@@ -21,5 +21,7 @@ lazy val root = (project in file("."))
       "play.api.data._",
       "play.api.i18n._",
       "play.api.templates.PlayMagic._"
-    )
+    ),
+    (unmanagedSourceDirectories in Test) +=
+      baseDirectory.value / "src" / "test" / "twirl"
   )
