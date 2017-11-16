@@ -12,7 +12,7 @@ class SelectSpec extends SpecBase with MockFields {
       val output: String = select(
         field = normalField,
         label = "some.message",
-        options = Seq(("some value", "some text"))
+        options = Seq("some value" -> "some text")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -26,7 +26,6 @@ class SelectSpec extends SpecBase with MockFields {
       val selectElement = doc.select("select")
       selectElement must haveAttr("id", "my_id")
       selectElement must haveAttr("name", "my.name")
-      selectElement must haveAttr("required")
 
       val optionElement = doc.select("option")
       optionElement.size mustEqual 1
@@ -40,7 +39,7 @@ class SelectSpec extends SpecBase with MockFields {
         field = normalField,
         label = "some.message",
         placeholder = Some("some placeholder"),
-        options = Seq()
+        options = Seq.empty
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -111,7 +110,7 @@ class SelectSpec extends SpecBase with MockFields {
       val output: String = select(
         field = normalField,
         label = "some.message",
-        labelClasses = Seq("some-extra-class"),
+        labelClasses = Set("some-extra-class"),
         options = Seq.empty
       ).toString
 
@@ -127,7 +126,7 @@ class SelectSpec extends SpecBase with MockFields {
       val output: String = select(
         field = normalField,
         label = "some.message",
-        inputClasses = Seq("some-extra-class"),
+        inputClasses = Set("some-extra-class"),
         options = Seq.empty
       ).toString
 
@@ -142,7 +141,7 @@ class SelectSpec extends SpecBase with MockFields {
       val output: String = select(
         field = normalField,
         label = "some.message",
-        groupClasses = Seq("some-extra-class"),
+        groupClasses = Set("some-extra-class"),
         options = Seq.empty
       ).toString
 

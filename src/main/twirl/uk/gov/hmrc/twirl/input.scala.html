@@ -1,7 +1,6 @@
 @(
         field: Field,
         label: Html,
-        required: Boolean = true,
         hint: Option[Html] = None,
         maxLength: Option[Int] = None,
         groupClasses: Seq[String] = Seq.empty,
@@ -25,7 +24,6 @@
         @maxLength.map { maxLength =>
           maxLength="@maxLength"
         }
-        @if(required){ required }
         name="@field.name"
         type="text"
         value="@field.value"

@@ -26,7 +26,6 @@ class InputSpec extends SpecBase with MockFields {
       inputElement must haveAttr("id", "my_id")
       inputElement must haveAttr("name", "my.name")
       inputElement must haveAttr("value", "")
-      inputElement must haveAttr("required")
       inputElement mustNot haveAttr("maxLength")
 
       val labelElement = doc.select("label")
