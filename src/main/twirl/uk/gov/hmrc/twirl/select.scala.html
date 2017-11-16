@@ -1,7 +1,7 @@
 @(
         field: Field,
         label: Html,
-        required: Boolean,
+        required: Boolean = true,
         hint: Option[Html] = None,
         placeholder: Option[String] = None,
         options: Seq[(String, String)],
@@ -24,7 +24,8 @@
     <select
         class="form-control @if(field.hasErrors){form-control-error} @inputClasses.mkString(" ")"
         id="@field.id"
-        name="@field.name">
+        name="@field.name"
+        @if(required){ required }>
         @placeholder.map { placeholder =>
           <option value="">@placeholder</option>
         }
