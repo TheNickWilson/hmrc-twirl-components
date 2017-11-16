@@ -22,13 +22,14 @@ class RadioSpec extends SpecBase with MockFields {
 
       val inputElement = doc.select("input")
       inputElement must haveAttr("type", "radio")
-      inputElement must haveAttr("id", normalField.id)
+      inputElement must haveAttr("id", s"${normalField.id}-true")
       inputElement must haveAttr("name", normalField.name)
       inputElement must haveAttr("value", "true")
+      inputElement must haveAttr("required")
       inputElement mustNot haveAttr("checked")
 
       val labelElement = doc.select("label")
-      labelElement must haveAttr("for", normalField.id)
+      labelElement must haveAttr("for", s"${normalField.id}-true")
       labelElement.text mustEqual "some.message"
     }
 
@@ -59,6 +60,21 @@ class RadioSpec extends SpecBase with MockFields {
 
       val containerElement = doc.select(".multiple-choice")
       containerElement must haveAttr("data-target", "some-data-target")
+    }
+
+    "render an optional radio button" in {
+
+      val output: String = radio(
+        field = fieldWithValue("true"),
+        label = "some.message",
+        value = "true",
+        required = false
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      val inputElement = doc.select("input")
+      inputElement mustNot haveAttr("required")
     }
   }
 }

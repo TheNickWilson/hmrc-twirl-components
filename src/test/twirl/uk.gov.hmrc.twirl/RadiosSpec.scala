@@ -28,9 +28,9 @@ class RadiosSpec extends SpecBase with MockFields {
       val groupElement = doc.select(".form-group")
       groupElement mustNot be(empty)
       groupElement mustNot haveClass("form-group-error")
+      groupElement must haveAttr("id", "my_id")
 
       val fieldsetElement = doc.select("fieldset")
-      fieldsetElement must haveAttr("id", "my_id")
       fieldsetElement mustNot haveAttr("class")
 
       val legendElement = doc.select("legend")
@@ -49,14 +49,15 @@ class RadiosSpec extends SpecBase with MockFields {
 
           val inputElement = dom.select("input")
           inputElement must haveAttr("type", "radio")
-          inputElement must haveAttr("id", s"${normalField.id}-${radio.id}")
+          inputElement must haveAttr("id", s"${normalField.id}-${radio.value}")
           inputElement must haveAttr("name", normalField.name)
           inputElement must haveAttr("value", radio.value)
+          inputElement must haveAttr("required")
           inputElement mustNot haveAttr("checked")
           inputElement mustNot haveAttr("data-target")
 
           val labelElement = dom.select("label")
-          labelElement must haveAttr("for", s"${normalField.id}-${radio.id}")
+          labelElement must haveAttr("for", s"${normalField.id}-${radio.value}")
           labelElement.text mustEqual radio.label
       }
     }
@@ -179,6 +180,29 @@ class RadiosSpec extends SpecBase with MockFields {
 
       val fieldsetElement = doc.select("fieldset")
       fieldsetElement must haveClass("inline")
+    }
+
+    "render an optional radio group" in {
+
+      val radioButtons = Seq(
+        RadioOption("id_1", "1", "some.label.1"),
+        RadioOption("id_2", "2", "some.label.2")
+      )
+
+      val output: String = radios(
+        field = normalField,
+        legend = "some.message",
+        required = false,
+        radioButtons = radioButtons
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      val inputElements = doc.select("input")
+      inputElements.size mustEqual 2
+      inputElements.asScala.foreach {
+        _.getAllElements mustNot haveAttr("required")
+      }
     }
   }
 }

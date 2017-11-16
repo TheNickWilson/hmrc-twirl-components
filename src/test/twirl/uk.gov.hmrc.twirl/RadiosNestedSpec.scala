@@ -17,6 +17,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
 
       val doc = Jsoup.parseBodyFragment(output)
 
+      val groupElement = doc.select(".form-group")
+      groupElement must haveAttr("id", normalField.id)
+
       val fieldsetElement = doc.select("fieldset")
       fieldsetElement mustNot haveAttr("class")
 
