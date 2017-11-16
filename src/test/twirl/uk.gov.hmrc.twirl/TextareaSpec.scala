@@ -1,26 +1,16 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
-import org.mockito.Mockito._
-import play.api.data.{Field, FormError}
 import uk.gov.hmrc.twirl.html.textarea
 
-class TextareaSpec extends SpecBase {
-
-  val field: Field = mock[Field]
+class TextareaSpec extends SpecBase with MockFields {
 
   "textarea.scala.html" must {
 
     "render a default textarea" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.messages"
       ).toString
 
@@ -47,14 +37,8 @@ class TextareaSpec extends SpecBase {
 
     "render a prefilled textarea" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn Some("some text")
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = fieldWithValue("some text"),
         label = "some.messages"
       ).toString
 
@@ -66,14 +50,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea when hint text is provided" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         hint = Some("some hint text"),
         label = "some.message"
       ).toString
@@ -86,16 +64,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with errors when the field has errors" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn true
-      when(field.errors) thenReturn Seq(
-        FormError("my.name", "some error")
-      )
-
       val output: String = textarea(
-        field = field,
+        field = fieldWithError,
         label = "some.messages"
       ).toString
 
@@ -113,14 +83,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with custom label classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         labelClasses = Seq("some-extra-class")
       ).toString
@@ -134,14 +98,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with custom textarea classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         textareaClasses = Seq("some-extra-class")
       ).toString
@@ -154,14 +112,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with custom group classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         groupClasses = Seq("some-extra-class")
       ).toString
@@ -174,14 +126,8 @@ class TextareaSpec extends SpecBase {
 
     "render an optional textarea" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         required = false
       ).toString
@@ -194,14 +140,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with `maxLength`" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         maxLength = Some(10)
       ).toString
@@ -214,14 +154,8 @@ class TextareaSpec extends SpecBase {
 
     "render a textarea with the right number of rows" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = textarea(
-        field = field,
+        field = normalField,
         label = "some.message",
         rows = 10
       ).toString

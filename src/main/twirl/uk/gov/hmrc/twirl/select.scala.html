@@ -1,0 +1,40 @@
+@(
+        field: Field,
+        label: Html,
+        required: Boolean = true,
+        hint: Option[Html] = None,
+        placeholder: Option[String] = None,
+        options: Seq[(String, String)],
+        groupClasses: Seq[String] = Seq.empty,
+        labelClasses: Seq[String] = Seq("form-label-bold"),
+        inputClasses: Seq[String] = Seq.empty
+)(implicit messages: Messages)
+
+<div id="@field.id-form" class="@groupClasses.mkString(" ") form-group @if(field.hasErrors){ form-group-error }">
+    <label for="@field.id">
+        <span class="@labelClasses.mkString(" ")">@label</span>
+        @hint.map { hint =>
+            <span class="form-hint">@hint</span>
+        }
+        @field.errors.headOption.map { error =>
+            <span class="error-message">@messages(error.message, error.args: _*)</span>
+        }
+    </label>
+
+    <select
+        class="form-control @if(field.hasErrors){form-control-error} @inputClasses.mkString(" ")"
+        id="@field.id"
+        name="@field.name"
+        @if(required){ required }>
+        @placeholder.map { placeholder =>
+          <option value="">@placeholder</option>
+        }
+        @for((value, text) <- options){
+            <option
+                value="@value"
+                @if(field.value.contains(value)){ selected }>
+                @text
+            </option>
+        }
+    </select>
+</div>
