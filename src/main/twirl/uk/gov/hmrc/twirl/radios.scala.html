@@ -1,0 +1,29 @@
+@(
+        field: Field,
+        legend: String,
+        radioButtons: Seq[RadioOption],
+        hiddenLegend: Boolean = false,
+        inline: Boolean = false,
+        hint: Option[String] = None,
+        fieldsetClasses: Set[String] = Set.empty,
+        legendClasses: Set[String] = Set("bold-small")
+)(implicit messages: Messages)
+
+@radios_nested(
+    field = field,
+    legend = legend,
+    hiddenLegend = hiddenLegend,
+    inline = inline,
+    hint = hint,
+    fieldsetClasses = fieldsetClasses,
+    legendClasses = legendClasses
+) {
+    @for(radioButton <- radioButtons) {
+        @radio(
+            field = field,
+            label = radioButton.label,
+            value = radioButton.value,
+            dataTarget = radioButton.dataTarget
+        )
+    }
+}

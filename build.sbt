@@ -20,7 +20,8 @@ lazy val root = (project in file("."))
       "play.api.mvc._",
       "play.api.data._",
       "play.api.i18n._",
-      "play.api.templates.PlayMagic._"
+      "play.api.templates.PlayMagic._",
+      "uk.gov.hmrc.twirl.viewmodels._"
     ),
     (unmanagedSourceDirectories in Test) +=
       baseDirectory.value / "src" / "test" / "twirl"
