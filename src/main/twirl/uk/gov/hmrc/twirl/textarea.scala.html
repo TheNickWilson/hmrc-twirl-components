@@ -1,7 +1,6 @@
 @(
         field: Field,
         label: Html,
-        required: Boolean = true,
         rows: Int = 8,
         hint: Option[Html] = None,
         maxLength: Option[Int] = None,
@@ -28,7 +27,6 @@
         @maxLength.map { maxLength =>
             maxLength="@maxLength"
         }
-        @if(required){ required }
         name="@field.name">
     @field.value
     </textarea>

@@ -25,7 +25,6 @@ class TextareaSpec extends SpecBase with MockFields {
       val textareaElement = doc.select("textarea")
       textareaElement must haveAttr("id", "my_id")
       textareaElement must haveAttr("name", "my.name")
-      textareaElement must haveAttr("required")
       textareaElement.`val` mustEqual ""
       textareaElement mustNot haveAttr("maxLength")
       textareaElement must haveAttr("rows", "8")
@@ -122,20 +121,6 @@ class TextareaSpec extends SpecBase with MockFields {
 
       val groupElement = doc.select(".form-group")
       groupElement must haveClass("some-extra-class")
-    }
-
-    "render an optional textarea" in {
-
-      val output: String = textarea(
-        field = normalField,
-        label = "some.message",
-        required = false
-      ).toString
-
-      val doc = Jsoup.parseBodyFragment(output)
-
-      val textareaElement = doc.select("textarea")
-      textareaElement mustNot haveAttr("required")
     }
 
     "render a textarea with `maxLength`" in {

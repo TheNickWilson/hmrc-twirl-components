@@ -1,13 +1,12 @@
 @(
         field: Field,
         label: Html,
-        required: Boolean = true,
         hint: Option[Html] = None,
         placeholder: Option[String] = None,
         options: Seq[(String, String)],
-        groupClasses: Seq[String] = Seq.empty,
-        labelClasses: Seq[String] = Seq("form-label-bold"),
-        inputClasses: Seq[String] = Seq.empty
+        groupClasses: Set[String] = Set.empty,
+        labelClasses: Set[String] = Set("form-label-bold"),
+        inputClasses: Set[String] = Set.empty
 )(implicit messages: Messages)
 
 <div id="@field.id-form" class="@groupClasses.mkString(" ") form-group @if(field.hasErrors){ form-group-error }">
@@ -24,8 +23,7 @@
     <select
         class="form-control @if(field.hasErrors){form-control-error} @inputClasses.mkString(" ")"
         id="@field.id"
-        name="@field.name"
-        @if(required){ required }>
+        name="@field.name">
         @placeholder.map { placeholder =>
           <option value="">@placeholder</option>
         }
