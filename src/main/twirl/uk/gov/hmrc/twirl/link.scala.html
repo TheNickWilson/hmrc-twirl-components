@@ -1,0 +1,23 @@
+@(
+        text: String,
+        url: String,
+        hiddenText: Option[String] = None,
+        isButton: Boolean = false,
+        linkClasses: Seq[String] = Seq.empty
+)(implicit messages: Messages)
+
+<a href="@url"
+    @if(isButton){
+        role="button"
+        class="button @linkClasses.mkString(" ")"
+    } else {
+        class="@linkClasses.mkString(" ")"
+    }>
+
+    @if(hiddenText.isEmpty){
+        @text
+    } else {
+        <span aria-hidden="true">@text</span>
+        <span class="visually-hidden">@hiddenText</span>
+    }
+</a>
