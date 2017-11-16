@@ -1,0 +1,26 @@
+@(
+        errors: Seq[FormError],
+        heading: String = "error.summary.title",
+        summary: Option[String] = None
+)(implicit messages: Messages)
+
+@if(errors.nonEmpty) {
+
+    <div class="error-summary" role="alert" aria-labelledby="error-summary-heading" tabindex="-1">
+        <h2 class="heading-medium error-summary-heading" id="error-summary-heading">
+            @messages(heading)
+        </h2>
+
+        @summary.map { summary =>
+          <p>@messages(summary)</p>
+        }
+
+        <ul class="error-summary-list">
+            @for(error <- errors){
+                <li>
+                    <a href="#@{error.key}">@messages(error.message, error.args:_*)</a>
+                </li>
+            }
+        </ul>
+    </div>
+}
