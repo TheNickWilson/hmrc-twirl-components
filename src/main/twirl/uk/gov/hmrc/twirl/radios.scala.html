@@ -2,7 +2,6 @@
         field: Field,
         legend: String,
         radioButtons: Seq[RadioOption],
-        required: Boolean = true,
         hiddenLegend: Boolean = false,
         inline: Boolean = false,
         hint: Option[String] = None,
@@ -24,7 +23,6 @@
             field = field,
             label = radioButton.label,
             value = radioButton.value,
-            required = required,
             dataTarget = radioButton.dataTarget
         )
     }

@@ -2,12 +2,11 @@
         field: Field,
         label: String,
         value: String,
-        required: Boolean = true,
         dataTarget: Option[String] = None
 )(implicit messages: Messages)
 
 <div class="multiple-choice" @dataTarget.map { dataTarget => data-target="@dataTarget" }>
-    <input id="@field.id-@value" type="radio" name="@field.name" value="@value" @if(field.value.contains(value)){ checked } @if(required){ required }>
+    <input id="@field.id-@value" type="radio" name="@field.name" value="@value" @if(field.value.contains(value)){ checked }>
     <label class="block-label" for="@field.id-@value">
         @messages(label)
     </label>
