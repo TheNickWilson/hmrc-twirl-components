@@ -1,0 +1,50 @@
+@(
+        field: Field,
+        legend: Html,
+        radioButtons: Seq[RadioOption],
+        required: Boolean = true,
+        hiddenLegend: Boolean = false,
+        inline: Boolean = false,
+        hint: Option[Html] = None,
+        fieldsetClasses: Set[String] = Set.empty,
+        legendClasses: Set[String] = Set("bold-small")
+)(implicit messages: Messages)
+
+@_fieldsetClasses = @{
+    if (inline) {
+        fieldsetClasses + "inline"
+    } else {
+        fieldsetClasses
+    }
+}
+
+@_legendClasses = @{
+    if (hiddenLegend) {
+        legendClasses + "visually-hidden"
+    } else {
+        legendClasses
+    }
+}
+
+<div class="form-group @if(field.hasErrors){form-group-error}">
+    <fieldset @if(_fieldsetClasses.nonEmpty){class="@_fieldsetClasses.mkString(" ")"} id="@field.id">
+        <legend>
+            <span @if(_legendClasses.nonEmpty){class="@_legendClasses.mkString(" ")"}>@legend</span>
+            @field.errors.headOption.map { error =>
+                <span class="error-message">@messages(error.message, error.args: _*)</span>
+            }
+            @hint.map { hint =>
+              <span class="form-hint">@hint</span>
+            }
+        </legend>
+
+        @for(radio <- radioButtons) {
+            <div class="multiple-choice" @radio.dataTarget.map { dataTarget => data-target="@dataTarget"}>
+                <input id="@field.id-@radio.id" type="radio" name="@field.name" value="@radio.value" @if(field.value.contains(radio.value)){ checked }>
+                <label for="@field.id-@radio.id">
+                    @messages(radio.label)
+                </label>
+            </div>
+        }
+    </fieldset>
+</div>
