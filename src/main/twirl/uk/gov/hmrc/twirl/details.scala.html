@@ -1,0 +1,8 @@
+@(prompt: String)(block: Html)(implicit messages: Messages)
+
+<details class="details">
+    <summary class="summary">@messages(prompt)</summary>
+    <div class="details__inner panel panel-border-narrow">
+        @block
+    </div>
+</details>
