@@ -29,11 +29,11 @@
         @placeholder.map { placeholder =>
           <option value="">@placeholder</option>
         }
-        @for(option <- options){
+        @for((value, text) <- options){
             <option
-                value="@option._1"
-                @if(field.value.contains(option._1)){ selected }>
-                @option._2
+                value="@value"
+                @if(field.value.contains(value)){ selected }>
+                @text
             </option>
         }
     </select>
