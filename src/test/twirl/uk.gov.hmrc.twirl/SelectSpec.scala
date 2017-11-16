@@ -1,27 +1,16 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
-import org.mockito.Mockito._
-import play.api.data.{Field, FormError}
 import uk.gov.hmrc.twirl.html.select
 
-class SelectSpec extends SpecBase {
-
-  val field: Field = mock[Field]
+class SelectSpec extends SpecBase with MockFields {
 
   "select.scala.html" must {
 
     "render a default select with a single input" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         label = "some.message",
         options = Seq(("some value", "some text"))
       ).toString
@@ -47,14 +36,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with a placeholder option" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         label = "some.message",
         placeholder = Some("some placeholder"),
         options = Seq()
@@ -70,14 +53,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with an option pre-selected" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn Some("value 1")
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = fieldWithValue("value 1"),
         label = "some.message",
         options = Seq(
           ("value 1", "some text 1"),
@@ -96,14 +73,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with hint text when content is provided" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         hint = Some("some hint text"),
         label = "some.message",
         options = Seq.empty
@@ -117,16 +88,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with errors when the field has errors" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn true
-      when(field.errors) thenReturn Seq(
-        FormError("my.name", "some error")
-      )
-
       val output: String = select(
-        field = field,
+        field = fieldWithError,
         label = "some.message",
         options = Seq.empty
       ).toString
@@ -145,14 +108,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with custom label classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         label = "some.message",
         labelClasses = Seq("some-extra-class"),
         options = Seq.empty
@@ -167,14 +124,8 @@ class SelectSpec extends SpecBase {
 
     "render a select with custom input classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         label = "some.message",
         inputClasses = Seq("some-extra-class"),
         options = Seq.empty
@@ -188,14 +139,8 @@ class SelectSpec extends SpecBase {
 
     "render an input with custom group classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = select(
-        field = field,
+        field = normalField,
         label = "some.message",
         groupClasses = Seq("some-extra-class"),
         options = Seq.empty

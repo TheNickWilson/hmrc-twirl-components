@@ -1,26 +1,16 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
-import org.mockito.Mockito._
-import play.api.data.{Field, FormError}
 import uk.gov.hmrc.twirl.html.input
 
-class InputSpec extends SpecBase {
-
-  val field: Field = mock[Field]
+class InputSpec extends SpecBase with MockFields {
 
   "input.scala.html" must {
 
     "render a default input" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         label = "some.message"
       ).toString
 
@@ -46,14 +36,8 @@ class InputSpec extends SpecBase {
 
     "render a prefilled input" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn Some("some text")
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = fieldWithValue("some text"),
         label = "some.message"
       ).toString
 
@@ -65,14 +49,8 @@ class InputSpec extends SpecBase {
 
     "render an input with hint text when content is provided" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         hint = Some("some hint text"),
         label = "some.message"
       ).toString
@@ -85,16 +63,8 @@ class InputSpec extends SpecBase {
 
     "render an input with errors when the field has errors" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn true
-      when(field.errors) thenReturn Seq(
-        FormError("my.name", "some error")
-      )
-
       val output: String = input(
-        field = field,
+        field = fieldWithError,
         label = "some.message"
       ).toString
 
@@ -112,14 +82,8 @@ class InputSpec extends SpecBase {
 
     "render an input with custom label classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         label = "some.message",
         labelClasses = Seq("some-extra-class")
       ).toString
@@ -133,14 +97,8 @@ class InputSpec extends SpecBase {
 
     "render an input with custom input classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         label = "some.message",
         inputClasses = Seq("some-extra-class")
       ).toString
@@ -153,14 +111,8 @@ class InputSpec extends SpecBase {
 
     "render an input with custom group classes" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         label = "some.message",
         groupClasses = Seq("some-extra-class")
       ).toString
@@ -173,14 +125,8 @@ class InputSpec extends SpecBase {
 
     "render an input with `maxLength`" in {
 
-      when(field.id) thenReturn "my_id"
-      when(field.name) thenReturn "my.name"
-      when(field.value) thenReturn None
-      when(field.hasErrors) thenReturn false
-      when(field.errors) thenReturn Seq.empty
-
       val output: String = input(
-        field = field,
+        field = normalField,
         label = "some.message",
         maxLength = Some(10)
       ).toString
