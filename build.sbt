@@ -11,10 +11,13 @@ lazy val root = (project in file("."))
   .settings(
     libraryDependencies ++= Seq(
       "com.typesafe.play" %% "play" % PlayVersion.current % "provided",
+      "com.typesafe.play" %% "filters-helpers" % PlayVersion.current % "provided",
       "org.scalactic" %% "scalactic" % "3.0.4" % "test",
       "org.scalatest" %% "scalatest" % "3.0.4" % "test",
       "org.jsoup" % "jsoup" % "1.10.3" % "test",
-      "org.mockito" % "mockito-core" % "2.12.0" % "test"
+      "org.mockito" % "mockito-core" % "2.12.0" % "test",
+      "com.typesafe.play" %% "play-test" % PlayVersion.current % "test",
+      "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % "test"
     ),
     TwirlKeys.templateImports ++= Seq(
       "play.api.mvc._",
