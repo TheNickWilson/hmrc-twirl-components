@@ -1,15 +1,15 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
-import uk.gov.hmrc.twirl.html.heading
+import uk.gov.hmrc.twirl.html.page_header
 
-class HeadingSpec extends SpecBase {
+class PageHeaderSpec extends SpecBase {
 
-  "heading" must {
+  "page_header" must {
 
     "render a default heading" in {
 
-      val output: String = heading(
+      val output: String = page_header(
         heading = "some.heading"
       ).toString
 
@@ -21,7 +21,7 @@ class HeadingSpec extends SpecBase {
 
     "render a heading with a section" in {
 
-      val output: String = heading(
+      val output: String = page_header(
         heading = "some.heading",
         section = Some("some.section")
       ).toString
