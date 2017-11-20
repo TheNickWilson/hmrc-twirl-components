@@ -3,7 +3,6 @@
         legend: String,
         options: Seq[InputOption],
         hiddenLegend: Boolean = false,
-        inline: Boolean = false,
         hint: Option[String] = None,
         fieldsetClasses: Set[String] = Set.empty,
         legendClasses: Set[String] = Set("bold-small")
@@ -13,16 +12,16 @@
     field = field,
     legend = legend,
     hiddenLegend = hiddenLegend,
-    inline = inline,
     hint = hint,
     fieldsetClasses = fieldsetClasses,
     legendClasses = legendClasses
 ) {
-    @for(option <- options) {
-        @radio(
+    @for((option, index) <- options.zipWithIndex) {
+        @checkbox(
             field = field,
             label = option.label,
             value = option.value,
+            index = Some(index),
             dataTarget = option.dataTarget
         )
     }
