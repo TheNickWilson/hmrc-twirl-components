@@ -1,0 +1,14 @@
+@(
+        heading: String,
+        section: Option[String] = None
+)(implicit messages: Messages)
+
+<header class="page-header">
+    <h1 class="heading-xlarge">@messages(heading)</h1>
+    @section.map { section =>
+      <p class="heading-secondary">
+          <span class="visuallyhidden">@messages("section.hidden") </span>
+          @messages(section)
+      </p>
+    }
+</header>
