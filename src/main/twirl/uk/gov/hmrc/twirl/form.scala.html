@@ -3,7 +3,7 @@
 @import play.filters.csrf.{CSRF => CsrfFilter}
 @import views.html.helper.{CSRF => CsrfView}
 
-<form action="@action.url" method="@action.method" autocomplete="off">
+<form action="@action.url" method="@action.method" autocomplete="off" novalidate>
     @{
         CsrfFilter.getToken(request).map {
             token => CsrfView.formField(request)

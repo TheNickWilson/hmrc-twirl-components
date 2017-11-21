@@ -38,6 +38,8 @@ class FormSpec extends SpecBase with GuiceOneAppPerSuite {
       val formElement = doc.select("form")
       formElement must haveAttr("method", "some method")
       formElement must haveAttr("action", "some/url")
+      formElement must haveAttr("autocomplete", "off")
+      formElement must haveAttr("novalidate")
 
       val innerElement = doc.select("form #test")
       innerElement mustNot be(empty)
