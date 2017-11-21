@@ -1,0 +1,13 @@
+@(action: Call)(block: Html)(implicit request: Request[_], messages: Messages)
+
+@import play.filters.csrf.{CSRF => CsrfFilter}
+@import views.html.helper.{CSRF => CsrfView}
+
+<form action="@action.url" method="@action.method" autocomplete="off" novalidate>
+    @{
+        CsrfFilter.getToken(request).map {
+            token => CsrfView.formField(request)
+        }
+    }
+    @block
+</form>
