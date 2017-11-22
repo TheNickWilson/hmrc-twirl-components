@@ -1,14 +1,11 @@
 import play.core.PlayVersion
 
-name := "hmrc-twirl-components"
-
-version := "0.1"
-
-scalaVersion := "2.11.12"
-
 lazy val root = (project in file("."))
   .enablePlugins(SbtTwirl)
   .settings(
+    name := "hmrc-twirl-components",
+    version := "0.1",
+    scalaVersion := "2.11.12",
     libraryDependencies ++= Seq(
       "com.typesafe.play" %% "play" % PlayVersion.current % "provided",
       "org.scalactic" %% "scalactic" % "3.0.4" % "test",
@@ -25,4 +22,16 @@ lazy val root = (project in file("."))
     ),
     (unmanagedSourceDirectories in Test) +=
       baseDirectory.value / "src" / "test" / "twirl"
+  )
+
+lazy val itServer = (project in file("it-server"))
+  .enablePlugins(PlayScala)
+  .dependsOn(root)
+  .settings(
+    name := "it-server",
+    scalaVersion := "2.11.12",
+    TwirlKeys.templateImports ++= Seq(
+      "uk.gov.hmrc.twirl.html._",
+      "uk.gov.hmrc.twirl.viewmodels._"
+    )
   )
