@@ -29,6 +29,7 @@ class PageHeaderSpec extends SpecBase {
       val doc = Jsoup.parseBodyFragment(output)
 
       doc.select(".heading-secondary").text mustEqual "section.hidden some.section"
+      doc.select(".visually-hidden").text mustEqual "section.hidden"
     }
   }
 }
