@@ -2,15 +2,15 @@ package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
 import play.twirl.api.Html
-import uk.gov.hmrc.twirl.html.radios_nested
+import uk.gov.hmrc.twirl.html.fieldset
 
-class RadiosNestedSpec extends SpecBase with MockFields {
+class FieldsetSpec extends SpecBase with MockFields {
 
   "radios_nested" must {
 
-    "render a default radio fieldset" in {
+    "render a default fieldset" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message"
       )(Html("""<div id="test" />""")).toString
@@ -33,9 +33,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       doc.select("#test") mustNot be(empty)
     }
 
-    "render a radio fieldset with errors" in {
+    "render a fieldset with errors" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = fieldWithError,
         legend = "some.message"
       )(Html("""<div id="test" />""")).toString
@@ -46,9 +46,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       errorElement.text mustEqual "some error"
     }
 
-    "render a radio fieldset with hint text" in {
+    "render a fieldset with hint text" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message",
         hint = Some("some.hint.text")
@@ -60,9 +60,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       hintElement.text mustEqual "some.hint.text"
     }
 
-    "render a radio fieldset with custom legend classes" in {
+    "render a fieldset with custom legend classes" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message",
         legendClasses = Set("some-extra-class")
@@ -74,9 +74,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       legendElement must haveClass("some-extra-class")
     }
 
-    "render a radio fieldset with custom fieldset classes" in {
+    "render a fieldset with custom fieldset classes" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message",
         fieldsetClasses = Set("some-extra-class")
@@ -88,9 +88,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       fieldsetElement must haveClass("some-extra-class")
     }
 
-    "render an inline radio fieldset" in {
+    "render an inline fieldset" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message",
         inline = true
@@ -102,9 +102,9 @@ class RadiosNestedSpec extends SpecBase with MockFields {
       fieldsetElement must haveClass("inline")
     }
 
-    "render a radio fieldset with a hidden legend" in {
+    "render a fieldset with a hidden legend" in {
 
-      val output: String = radios_nested(
+      val output: String = fieldset(
         field = normalField,
         legend = "some.message",
         hiddenLegend = true

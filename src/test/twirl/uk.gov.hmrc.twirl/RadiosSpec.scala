@@ -2,7 +2,7 @@ package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
 import uk.gov.hmrc.twirl.html.radios
-import uk.gov.hmrc.twirl.viewmodels.RadioOption
+import uk.gov.hmrc.twirl.viewmodels.InputOption
 
 import scala.collection.JavaConverters._
 
@@ -13,14 +13,14 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a default radio group" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = normalField,
         legend = "some.message",
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -64,14 +64,14 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a preset radio group" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = fieldWithValue("1"),
         legend = "some.message",
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -83,14 +83,14 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a radio group with errors" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = fieldWithError,
         legend = "some.message",
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -105,14 +105,14 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a radio group with extra legend classes" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = normalField,
         legend = "some.message",
-        radioButtons = radioButtons,
+        options = radioButtons,
         legendClasses = Set("some-extra-class")
       ).toString
 
@@ -125,14 +125,14 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a radio group with a data-target attribute" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1", dataTarget = Some("some-data-target")),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1", dataTarget = Some("some-data-target")),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = normalField,
         legend = "some.message",
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -144,15 +144,15 @@ class RadiosSpec extends SpecBase with MockFields {
     "render a radio group with a hidden legend" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = normalField,
         legend = "some.message",
         hiddenLegend = true,
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -164,15 +164,15 @@ class RadiosSpec extends SpecBase with MockFields {
     "render an inline radio group" in {
 
       val radioButtons = Seq(
-        RadioOption("id_1", "1", "some.label.1"),
-        RadioOption("id_2", "2", "some.label.2")
+        InputOption("1", "some.label.1"),
+        InputOption("2", "some.label.2")
       )
 
       val output: String = radios(
         field = normalField,
         legend = "some.message",
         inline = true,
-        radioButtons = radioButtons
+        options = radioButtons
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)

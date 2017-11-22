@@ -1,0 +1,20 @@
+@(
+        field: Field,
+        label: String,
+        value: String,
+        index: Option[Int] = None,
+        dataTarget: Option[String] = None
+)(implicit messages: Messages)
+
+<div class="multiple-choice" @dataTarget.map { dataTarget => data-target="@dataTarget" }>
+    <input
+        id="@field.id-@value"
+        type="checkbox"
+        name="@field.name@index.map { index =>[@index]}"
+        value="@value"
+        @if(field.values.contains(value)) { checked }
+    >
+    <label class="block-label" for="@field.id-@value">
+        @messages(label)
+    </label>
+</div>
