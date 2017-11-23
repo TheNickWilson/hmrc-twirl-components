@@ -1,7 +1,6 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
-import uk.gov.hmrc.twirl.html.page_header
 
 class PageHeaderSpec extends SpecBase {
 
