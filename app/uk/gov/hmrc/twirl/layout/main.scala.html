@@ -1,0 +1,17 @@
+@(title: String)(content: Html)(implicit request: Request[_], messages: Messages)
+
+@html.govuk_template(
+    title = Some(title),
+    bodyClasses = None
+)(
+    head = HtmlFormat.empty,
+    bodyStart = HtmlFormat.empty,
+    bodyEnd = HtmlFormat.empty,
+    insideHeader = HtmlFormat.empty,
+    afterHeader = HtmlFormat.empty,
+    footerTop = HtmlFormat.empty,
+    footerLinks = HtmlFormat.empty,
+    skipLinkMessage = None,
+    licenceMessage = HtmlFormat.empty,
+    crownCopyrightMessage = None
+)(content)

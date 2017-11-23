@@ -2,9 +2,10 @@ package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
 import uk.gov.hmrc.twirl.html.radios
-import uk.gov.hmrc.twirl.viewmodels.InputOption
+import uk.gov.hmrc.viewmodels._
 
 import scala.collection.JavaConverters._
+
 
 class RadiosSpec extends SpecBase with MockFields {
 

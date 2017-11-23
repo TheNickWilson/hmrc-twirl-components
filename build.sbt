@@ -1,10 +1,12 @@
 import play.core.PlayVersion
 
+resolvers += Resolver.bintrayRepo("hmrc", "releases")
+
 lazy val root = (project in file("."))
-  .enablePlugins(SbtTwirl)
+  .enablePlugins(PlayScala, SbtWeb)
   .settings(
     name := "hmrc-twirl-components",
-    version := "0.1",
+    version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.11.12",
     libraryDependencies ++= Seq(
       "com.typesafe.play" %% "play" % PlayVersion.current % "provided",
@@ -17,14 +19,13 @@ lazy val root = (project in file("."))
       "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % "test"
     ),
     TwirlKeys.templateImports ++= Seq(
-      "play.api.mvc._",
-      "play.api.data._",
-      "play.api.i18n._",
-      "play.api.templates.PlayMagic._",
-      "uk.gov.hmrc.twirl.viewmodels._"
+      "uk.gov.hmrc.template.routes",
+      "uk.gov.hmrc.viewmodels._"
     ),
-    (unmanagedSourceDirectories in Test) +=
-      baseDirectory.value / "src" / "test" / "twirl"
+    (sourceDirectories in (Compile, TwirlKeys.compileTemplates)) +=
+      baseDirectory.value / "govuk_template_play" / "views" / "layouts",
+    (unmanagedResourceDirectories in Compile) +=
+      baseDirectory.value / "govuk_template_play" / "assets"
   )
 
 lazy val itServer = (project in file("it-server"))
@@ -35,6 +36,6 @@ lazy val itServer = (project in file("it-server"))
     scalaVersion := "2.11.12",
     TwirlKeys.templateImports ++= Seq(
       "uk.gov.hmrc.twirl.html._",
-      "uk.gov.hmrc.twirl.viewmodels._"
+      "uk.gov.hmrc.viewmodels._"
     )
   )

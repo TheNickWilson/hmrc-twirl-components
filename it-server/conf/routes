@@ -3,5 +3,8 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
+# Template controller for assets for govuk_template
+->      /template                   template.Routes
+
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index

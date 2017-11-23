@@ -1,3 +1,6 @@
-@()(implicit messages: Messages)
+@()(implicit request: Request[_], messages: Messages)
 
-@link("something", "http://www.google.com")
+@uk.gov.hmrc.twirl.layout.html.main("Test Page") {
+
+    @link("something", "http://www.google.com")
+}
