@@ -1,4 +1,4 @@
-package uk.gov.hmrc.twirl.viewmodels
+package uk.gov.hmrc.viewmodels
 
 import org.scalatest.{MustMatchers, WordSpec}
 import play.api.data.Form
@@ -7,16 +7,16 @@ class RichFieldSpec extends WordSpec with MustMatchers {
 
   val multiForm: Form[Set[String]] = {
 
-    import play.api.data._
     import play.api.data.Forms._
+    import play.api.data._
 
     Form("value" -> set(text))
   }
 
   val singleForm: Form[String] = {
 
-    import play.api.data._
     import play.api.data.Forms._
+    import play.api.data._
 
     Form("value" -> text)
   }

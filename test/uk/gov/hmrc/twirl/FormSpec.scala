@@ -4,11 +4,11 @@ import org.jsoup.Jsoup
 import play.api.mvc.Call
 import play.api.test._
 import play.twirl.api.Html
-import uk.gov.hmrc.twirl.html.form
 import org.scalatestplus.play.guice._
 import play.api.Application
 import play.filters.csrf.{CSRFConfigProvider, CSRFFilter}
 import play.filters.csrf.CSRF.Token
+import uk.gov.hmrc.twirl.html.form
 
 class FormSpec extends SpecBase with GuiceOneAppPerSuite {
 

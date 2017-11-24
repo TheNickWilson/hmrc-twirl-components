@@ -3,7 +3,7 @@ package uk.gov.hmrc.twirl
 import org.jsoup.Jsoup
 import play.api.data.{Form, FormError}
 import uk.gov.hmrc.twirl.html.checkboxes
-import uk.gov.hmrc.twirl.viewmodels.InputOption
+import uk.gov.hmrc.viewmodels._
 
 import scala.collection.JavaConverters._
 
@@ -140,7 +140,6 @@ class CheckboxesSpec extends SpecBase {
 
       val doc = Jsoup.parseBodyFragment(output)
 
-      println(doc.select("input[value=foo]"))
       doc.select("input[value=foo]").parents() must haveAttr("data-target", "some-data-target")
       doc.select("input[value=bar]").parents() mustNot haveAttr("data-target")
     }

@@ -6,6 +6,6 @@ import scala.language.implicitConversions
 
 package object twirl {
 
-  implicit def toHtml(string: String): Html =
-    Html(string)
+  implicit def toHtml(str: String): Html =
+    Html(str)
 }
