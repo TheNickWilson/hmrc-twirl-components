@@ -19,6 +19,7 @@ lazy val root = (project in file("."))
       "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % "test"
     ),
     TwirlKeys.templateImports ++= Seq(
+      "play.api.Configuration",
       "uk.gov.hmrc.template.routes",
       "uk.gov.hmrc.viewmodels._"
     ),
@@ -37,5 +38,7 @@ lazy val itServer = (project in file("it-server"))
     TwirlKeys.templateImports ++= Seq(
       "uk.gov.hmrc.twirl.html._",
       "uk.gov.hmrc.viewmodels._"
-    )
+    ),
+    libraryDependencies +=
+      "com.typesafe.play" %% "filters-helpers" % PlayVersion.current
   )

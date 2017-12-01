@@ -1,0 +1,20 @@
+@import uk.gov.hmrc.viewmodels.layout._
+
+@(config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+@anchorOpen = {
+    <a id="feedback-link" href="@config.feedbackUrl" data-journey-click="other-global:Click:Feedback">
+}
+
+@anchorClose = {
+    </a>
+}
+
+@config.phase.map { phase =>
+    <div class="phase-banner">
+        <p>
+            <strong class="phase-tag">@messages(s"phase.$phase")</strong>
+            <span>@Html(messages("phase.feedback", anchorOpen, anchorClose))</span>
+        </p>
+    </div>
+}

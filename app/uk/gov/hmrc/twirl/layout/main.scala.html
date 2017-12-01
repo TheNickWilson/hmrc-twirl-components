@@ -1,17 +1,40 @@
-@(title: String)(content: Html)(implicit request: Request[_], messages: Messages)
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+@import scala.collection.immutable.Seq
+
+@(
+        title: String,
+        config: LayoutConfiguration,
+        extraStyles: Html = HtmlFormat.empty,
+        extraScripts: Html = HtmlFormat.empty,
+        gaScript: Html = HtmlFormat.empty
+)(content: Html)(implicit request: Request[_], messages: Messages)
 
 @html.govuk_template(
     title = Some(title),
-    bodyClasses = None
+    bodyClasses = None,
+    htmlLang = Some(messages.lang.language)
 )(
-    head = HtmlFormat.empty,
+    head = new Html(Seq(styles(config), extraStyles)),
+    headerClass = Html("with-proposition"),
+    propositionHeader = proposition_header(config),
     bodyStart = HtmlFormat.empty,
-    bodyEnd = HtmlFormat.empty,
+    bodyEnd = new Html(Seq(scripts(config, gaScript), extraScripts)),
     insideHeader = HtmlFormat.empty,
     afterHeader = HtmlFormat.empty,
     footerTop = HtmlFormat.empty,
-    footerLinks = HtmlFormat.empty,
-    skipLinkMessage = None,
-    licenceMessage = HtmlFormat.empty,
-    crownCopyrightMessage = None
-)(content)
+    footerLinks = footer_links(),
+    skipLinkMessage = Some(Html(messages("template.skip"))),
+    licenceMessage = open_government_licence(),
+    cookieMessage = Some(cookie_message()),
+    crownCopyrightMessage = Some(Html("&copy; Crown copyright"))
+) {
+
+    <div class="centered-content">
+        @phase_banner(config)
+        @hmrc_banner()
+    </div>
+
+    <main id="content" role="main">
+        @content
+    </main>
+}

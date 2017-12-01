@@ -1,6 +1,28 @@
-@()(implicit request: Request[_], messages: Messages)
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
 
-@uk.gov.hmrc.twirl.layout.html.main("Test Page") {
+@(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
 
-    @link("something", "http://www.google.com")
+@uk.gov.hmrc.twirl.layout.html.main("Test Page", config) {
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            @page_header("Test Page")
+
+            @form(controllers.routes.HomeController.index()) {
+
+                @radios(
+                    field        = formInstance("value"),
+                    legend       = "Foo",
+                    hiddenLegend = true,
+                    inline       = true,
+                    options      = Seq(
+                        InputOption("true", "Yes"),
+                        InputOption("false", "No")
+                    )
+                )
+            }
+
+        </div>
+    </div>
 }

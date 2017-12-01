@@ -4,7 +4,10 @@ import org.jsoup.select.Elements
 import org.scalatest.matchers.{MatchResult, Matcher}
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{MustMatchers, WordSpec}
+import play.api.Configuration
 import play.api.i18n.{Lang, Messages}
+import play.api.mvc.Request
+import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
 
 class SpecBase extends WordSpec with MustMatchers with MockitoSugar {
 
@@ -39,5 +42,16 @@ class SpecBase extends WordSpec with MustMatchers with MockitoSugar {
         s"element did not contain class: $className",
         s"element contained class: $className"
       )
+  }
+
+  def configuration(entries: (String, String)*): LayoutConfiguration = {
+    new LayoutConfiguration {
+
+      override protected def config: Configuration =
+        Configuration(entries: _*)
+
+      override def feedbackUrl(implicit request: Request[_]) = ???
+      override def indexUrl(implicit request: Request[_]) = ???
+    }
   }
 }
