@@ -1,0 +1,11 @@
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+
+@(config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+<div class="header-proposition">
+    <div class="content">
+        <nav id="proposition-menu">
+            <a href="@config.indexUrl" id="proposition-name">@messages("service.name")</a>
+        </nav>
+    </div>
+</div>

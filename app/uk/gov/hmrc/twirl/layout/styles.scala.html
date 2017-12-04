@@ -1,0 +1,13 @@
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+
+@(config: LayoutConfiguration)
+
+<!--[if lt IE 8 ]>
+<link rel="stylesheet" href="@config.assetsPrefix/stylesheets/application-ie7.min.css" />
+<![endif]-->
+<!--[if IE 8 ]>
+<link rel="stylesheet" href="@config.assetsPrefix/stylesheets/application-ie.min.css" />
+<![endif]-->
+<!--[if gt IE 8]><!-->
+<link rel="stylesheet" href="@config.assetsPrefix/stylesheets/application.min.css" />
+<!--<![endif]-->

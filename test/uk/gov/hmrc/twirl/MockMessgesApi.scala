@@ -18,6 +18,17 @@ object MockMessagesApi extends MessagesApi {
   override def langCookieSecure = ???
   override def langCookieHttpOnly = ???
 
-  override def apply(key: String, args: Any*)(implicit lang: Lang): String = key
-  override def apply(keys: Seq[String], args: Any*)(implicit lang: Lang): String = keys.head
+  override def apply(key: String, args: Any*)(implicit lang: Lang): String = {
+
+    val argsString: String = if (args.nonEmpty) {
+      s" args: ${args.mkString(" ")}"
+    } else {
+      ""
+    }
+
+    key + argsString
+  }
+
+  override def apply(keys: Seq[String], args: Any*)(implicit lang: Lang): String =
+    apply(keys.head, args)
 }
