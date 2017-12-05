@@ -39,6 +39,10 @@ lazy val itServer = (project in file("it-server"))
       "uk.gov.hmrc.twirl.html._",
       "uk.gov.hmrc.viewmodels._"
     ),
+    routesImport ++= Seq(
+      "play.api.i18n._",
+      "util.PathBindables._"
+    ),
     libraryDependencies +=
       "com.typesafe.play" %% "filters-helpers" % PlayVersion.current
   )

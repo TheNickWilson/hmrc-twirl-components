@@ -2,6 +2,7 @@ package uk.gov.hmrc.twirl.layout
 
 import org.jsoup.Jsoup
 import play.api.Configuration
+import play.api.i18n.Lang
 import play.api.mvc.Request
 import play.api.test.FakeRequest
 import uk.gov.hmrc.twirl.SpecBase
@@ -41,6 +42,7 @@ class PhaseBannerSpec extends SpecBase {
       override protected def config: Configuration = Configuration(entries: _*)
       override def feedbackUrl(implicit request: Request[_]): String = "foobar"
       override def indexUrl(implicit request: Request[_]): String = ???
+      override def setLanguageUrl(lang: Lang)(implicit request: Request[_]) = ???
     }
   }
 }

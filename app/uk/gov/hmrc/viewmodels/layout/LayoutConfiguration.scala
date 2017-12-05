@@ -1,6 +1,7 @@
 package uk.gov.hmrc.viewmodels.layout
 
 import play.api.Configuration
+import play.api.i18n.Lang
 import play.api.mvc.Request
 
 trait LayoutConfiguration {
@@ -18,4 +19,5 @@ trait LayoutConfiguration {
 
   def indexUrl(implicit request: Request[_]): String
   def feedbackUrl(implicit request: Request[_]): String
+  def setLanguageUrl(lang: Lang)(implicit request: Request[_]): String
 }
