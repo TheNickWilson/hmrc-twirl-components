@@ -1,0 +1,19 @@
+@import uk.gov.hmrc.viewmodels.layout._
+
+@(config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+@* NOTE: Implementation is not in line with HMRC Design Patterns *@
+
+@language(message: String, lang: Lang) = {
+    @if(messages.lang == lang) {
+        @message
+    } else {
+        <a href="@config.setLanguageUrl(lang)">@message</a>
+    }
+}
+
+<div class="lang-select section push--bottom">
+    @language("English", Lang("en"))
+    <span aria-hidden="true"> | </span>
+    @language("Cymraeg", Lang("cy"))
+</div>
