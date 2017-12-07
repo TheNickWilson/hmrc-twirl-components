@@ -1,9 +1,11 @@
 @import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+@import uk.gov.hmrc.viewmodels.layout.User
 @import scala.collection.immutable.Seq
 
 @(
         title: String,
         config: LayoutConfiguration,
+        user: Option[User] = None,
         extraStyles: Html = HtmlFormat.empty,
         extraScripts: Html = HtmlFormat.empty,
         gaScript: Html = HtmlFormat.empty
@@ -16,7 +18,7 @@
 )(
     head = new Html(Seq(styles(config), extraStyles)),
     headerClass = Html("with-proposition"),
-    propositionHeader = proposition_header(config),
+    propositionHeader = proposition_header(config, user),
     bodyStart = HtmlFormat.empty,
     bodyEnd = new Html(Seq(scripts(config, gaScript), extraScripts)),
     insideHeader = HtmlFormat.empty,
@@ -31,7 +33,7 @@
 
     <div class="centered-content">
         @phase_banner(config)
-        @hmrc_banner()
+        @hmrc_banner(user)
         @language_selector(config)
     </div>
 
