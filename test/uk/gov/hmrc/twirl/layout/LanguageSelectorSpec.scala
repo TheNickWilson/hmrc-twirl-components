@@ -17,6 +17,7 @@ class LanguageSelectorSpec extends SpecBase {
     override protected def config: Configuration = ???
     override def indexUrl(implicit request: Request[_]): String = ???
     override def feedbackUrl(implicit request: Request[_]): String = ???
+    override def signOutUrl(implicit request: Request[_]): String = ???
     override def setLanguageUrl(lang: Lang)(implicit request: Request[_]): String =
       lang.language + "-url"
   }

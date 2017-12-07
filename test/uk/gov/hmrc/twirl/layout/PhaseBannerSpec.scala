@@ -43,6 +43,7 @@ class PhaseBannerSpec extends SpecBase {
       override def feedbackUrl(implicit request: Request[_]): String = "foobar"
       override def indexUrl(implicit request: Request[_]): String = ???
       override def setLanguageUrl(lang: Lang)(implicit request: Request[_]) = ???
+      override def signOutUrl(implicit request: Request[_]) = ???
     }
   }
 }

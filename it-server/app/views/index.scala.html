@@ -1,8 +1,9 @@
 @import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+@import util.User
 
 @(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
 
-@uk.gov.hmrc.twirl.layout.html.main("Test Page", config) {
+@uk.gov.hmrc.twirl.layout.html.main("Test Page", config, Some(User)) {
 
     <div class="grid-row">
         <div class="column-two-thirds">

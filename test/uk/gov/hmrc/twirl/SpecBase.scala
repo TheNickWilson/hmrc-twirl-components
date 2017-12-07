@@ -53,6 +53,7 @@ class SpecBase extends WordSpec with MustMatchers with MockitoSugar {
       override def feedbackUrl(implicit request: Request[_]) = ???
       override def indexUrl(implicit request: Request[_]) = ???
       override def setLanguageUrl(lang: Lang)(implicit request: Request[_]) = ???
+      override def signOutUrl(implicit request: Request[_]) = ???
     }
   }
 }
