@@ -6,23 +6,88 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
+            @back_link()
 
-            @page_header("Test Page")
+            @*@error_summary(
+              errors    = Seq({key:"errorID"; message="errorMessage"}),
+              summary   = "[Error summary]"
+            )*@
+
+
+            @page_header("Test Page", Some("Section name"))
+
+            @details(
+              prompt = "[Details component]"
+            ){
+              <p>[This copy is in the reveal]</p>
+            }
 
             @form(controllers.routes.HomeController.index()) {
 
-                @radios(
-                    field        = formInstance("value"),
-                    legend       = "Foo",
-                    hiddenLegend = true,
-                    inline       = true,
-                    options      = Seq(
-                        InputOption("true", "Yes"),
-                        InputOption("false", "No")
-                    )
-                )
 
-                <button type="submit" class="button">Submit</button>
+
+              @date(
+                  field        = formInstance("dateOfBirth"),
+                  legend       = "Date of birth",
+                  hiddenLegend = false,
+                  hint         = Some("[Hint goes here]"),
+                  fieldDay     = formInstance("dateOfBirth.day"),
+                  fieldMonth   = formInstance("dateOfBirth.month"),
+                  fieldYear    = formInstance("dateOfBirth.year")
+              )
+
+            @checkboxes(
+                field        = formInstance("chbComponent"),
+                legend       = "Fi",
+                hiddenLegend = true,
+                hint         = Some("[Hint goes here]"),
+                options      = Seq(
+                    InputOption("one", "One"),
+                    InputOption("two", "Two")
+                )
+            )
+
+            @input(
+              field         = formInstance("textInput"),
+              label         = Html("[Label for text input]"),
+              hint          = Some(Html("[Hint for tex input]")),
+              maxLength     = Some(255),
+              groupClasses  = Seq("group-one group-two group-three"),
+              labelClasses  = Seq("label-one label-two label-three"),
+              inputClasses  = Seq("input-one input-two input-three")
+            )
+
+
+
+
+              @radios(
+                  field        = formInstance("value"),
+                  legend       = "Foo",
+                  hiddenLegend = true,
+                  inline       = true,
+                  options      = Seq(
+                      InputOption("true", "Yes"),
+                      InputOption("false", "No")
+                  )
+              )
+
+              @link(
+                text        = "[Button-link copy]",
+                url         = "http://www.example.com",
+                hiddenText  = Some("[Screenreader copy]"),
+                isButton    = true,
+                linkClasses = Seq("link-one link-two link-three")
+              )
+              <p>
+              @link(
+                text        = "[Link copy]",
+                url         = "http://www.example.com",
+                hiddenText  = Some("[Screenreader copy]"),
+                isButton    = false,
+                linkClasses = Seq("link-one link-two link-three")
+              )
+              </p>
+              <button type="submit" class="button">Submit</button>
             }
 
         </div>

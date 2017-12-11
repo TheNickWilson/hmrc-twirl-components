@@ -1,0 +1,26 @@
+@(
+        field: Field,
+        label: Html,
+        maxLength: Option[Int] = None,
+        max: Option[Int] = None,
+        min: Option[Int] = None,
+        groupClasses: Seq[String] = Seq.empty,
+        inputClasses: Seq[String] = Seq.empty
+)(implicit messages: Messages)
+
+<div class="@groupClasses.mkString(" ") form-group">
+    <label for="@field.id">@label</label>
+    <input
+        class="form-control @inputClasses.mkString(" ")"
+        id="@field.id"
+        @max.map { max =>
+          max="@max"
+        }
+        @min.map { min =>
+          min="@min"
+        }
+        name="@field.name"
+        type="number"
+        value="@field.value"
+    />
+</div>

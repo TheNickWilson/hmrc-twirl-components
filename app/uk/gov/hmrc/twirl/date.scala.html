@@ -1,0 +1,49 @@
+@(
+  field: Field,
+  legend: String,
+  hiddenLegend: Boolean = false,
+  hint: Option[String] = None,
+  fieldsetClasses: Set[String] = Set.empty,
+  legendClasses: Set[String] = Set("bold-small"),
+  fieldDay: Field,
+  fieldMonth: Field,
+  fieldYear: Field
+)(implicit messages: Messages)
+
+
+@fieldset(
+    field = field,
+    legend = legend,
+    hiddenLegend = hiddenLegend,
+    hint = hint,
+    fieldsetClasses = fieldsetClasses,
+    legendClasses = legendClasses
+) {
+        <div class="form-date">
+
+            @date_input(
+              field = fieldDay,
+              label = Html("Day"),
+              min = Some(1),
+              max = Some(31),
+              groupClasses = Seq("form-group-day")
+            )
+
+            @date_input(
+              field = fieldMonth,
+              label = Html("Month"),
+              min = Some(1),
+              max = Some(12),
+              groupClasses = Seq("form-group-month")
+            )
+
+            @date_input(
+              field = fieldYear,
+              label = Html("Year"),
+              min = Some(1700),
+              max = Some(2020),
+              groupClasses = Seq("form-group-year")
+            )
+
+        </div>
+}
