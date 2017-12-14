@@ -1,0 +1,38 @@
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+
+@(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+@uk.gov.hmrc.twirl.layout.html.main("Test Page", config) {
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @back_link()
+
+            @error_summary(
+              errors    = formInstance.errors,
+              summary   = Some("[Error summary]")
+            )
+
+
+            @page_header("Test Page", Some("Section name"))
+            
+
+            @form(controllers.routes.DateController.index()) {
+              @date(
+                  field        = formInstance("dateOfBirth"),
+                  legend       = "Date of birth",
+                  hiddenLegend = false,
+                  hint         = Some("[Hint goes here]")                  
+              )
+            }
+
+
+
+
+              
+              <button type="submit" class="button">Submit</button>
+            
+
+        </div>
+    </div>
+}

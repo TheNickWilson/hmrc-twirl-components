@@ -4,10 +4,7 @@
   hiddenLegend: Boolean = false,
   hint: Option[String] = None,
   fieldsetClasses: Set[String] = Set.empty,
-  legendClasses: Set[String] = Set("bold-small"),
-  fieldDay: Field,
-  fieldMonth: Field,
-  fieldYear: Field
+  legendClasses: Set[String] = Set("bold-small")
 )(implicit messages: Messages)
 
 
@@ -22,7 +19,7 @@
         <div class="form-date">
 
             @date_input(
-              field = fieldDay,
+              field = field("day"),
               label = Html("Day"),
               min = Some(1),
               max = Some(31),
@@ -30,7 +27,7 @@
             )
 
             @date_input(
-              field = fieldMonth,
+              field = field("month"),
               label = Html("Month"),
               min = Some(1),
               max = Some(12),
@@ -38,7 +35,7 @@
             )
 
             @date_input(
-              field = fieldYear,
+              field = field("year"),
               label = Html("Year"),
               min = Some(1700),
               max = Some(2020),

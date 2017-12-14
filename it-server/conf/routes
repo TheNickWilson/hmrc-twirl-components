@@ -9,3 +9,4 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /set-language/:lang         controllers.LanguageController.setLanguage(lang: Lang)
+GET     /date                       controllers.DateController.index
