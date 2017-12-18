@@ -1,18 +1,27 @@
 @(
         field: Field,
         label: Html,
+        hiddenLabel: Boolean = false,
         hint: Option[Html] = None,
         typeAttr: String = "text",
         inline: Boolean = false,
         attributes: Map[String, String] = Map.empty,
-        groupClasses: Seq[String] = Seq.empty,
-        labelClasses: Seq[String] = Seq("form-label-bold"),
-        inputClasses: Seq[String] = Seq.empty
+        groupClasses: Set[String] = Set.empty,
+        labelClasses: Set[String] = Set("form-label-bold"),
+        inputClasses: Set[String] = Set.empty
 )(implicit messages: Messages)
+
+@_labelClasses = @{
+    if (hiddenLabel) {
+        labelClasses + "visually-hidden"
+    } else {
+        labelClasses
+    }
+}
 
 <div id="@field.id-form" class="@groupClasses.mkString(" ") form-group @if(field.hasErrors && !inline){ form-group-error }">
     <label for="@field.id">
-        <span class="@labelClasses.mkString(" ")">@label</span>
+        <span class="@_labelClasses.mkString(" ")">@label</span>
         @hint.map { hint =>
             <span class="form-hint">@hint</span>
         }

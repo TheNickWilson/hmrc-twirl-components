@@ -1,0 +1,36 @@
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+
+@(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+@uk.gov.hmrc.twirl.layout.html.main("Checkbox page", config) {
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            @back_link()
+
+            @error_summary(
+                form = formInstance
+            )
+
+            @page_header("Checkbox", Some("Section name"))
+
+            @form(controllers.routes.CheckboxController.post()) {
+
+                @checkboxes(
+                    field        = formInstance("input"),
+                    legend       = "Checkbox",
+                    hiddenLegend = true,
+                    options      = Seq(
+                        InputOption("First", "First"),
+                        InputOption("Second", "Second"),
+                        InputOption("Third", "Third")
+                    )
+                )
+
+                <button type="submit" class="button">Submit</button>
+            }
+
+        </div>
+    </div>
+}

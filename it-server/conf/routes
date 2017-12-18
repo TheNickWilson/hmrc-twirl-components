@@ -15,3 +15,9 @@ POST    /date                       controllers.DateController.post()
 
 GET     /option-other               controllers.OptionOtherController.get()
 POST    /option-other               controllers.OptionOtherController.post()
+
+GET     /input                      controllers.InputController.get()
+POST    /input                      controllers.InputController.post()
+
+GET     /checkbox                   controllers.CheckboxController.get()
+POST    /checkbox                   controllers.CheckboxController.post()
