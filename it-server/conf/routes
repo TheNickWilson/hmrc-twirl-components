@@ -21,3 +21,6 @@ POST    /input                      controllers.InputController.post()
 
 GET     /checkbox                   controllers.CheckboxController.get()
 POST    /checkbox                   controllers.CheckboxController.post()
+
+GET     /textarea                   controllers.TextareaController.get()
+POST    /textarea                   controllers.TextareaController.post()
