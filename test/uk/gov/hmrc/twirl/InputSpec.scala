@@ -32,6 +32,7 @@ class InputSpec extends SpecBase with MockFields {
       val labelElement = doc.select("label")
       labelElement.text mustEqual "some.message"
       labelElement must haveAttr("for", "my_id")
+      labelElement.select("span") mustNot haveClass("visually-hidden")
     }
 
     "render a prefilled input" in {
@@ -85,7 +86,7 @@ class InputSpec extends SpecBase with MockFields {
       val output: String = input(
         field = normalField,
         label = "some.message",
-        labelClasses = Seq("some-extra-class")
+        labelClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -100,7 +101,7 @@ class InputSpec extends SpecBase with MockFields {
       val output: String = input(
         field = normalField,
         label = "some.message",
-        inputClasses = Seq("some-extra-class")
+        inputClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -114,7 +115,7 @@ class InputSpec extends SpecBase with MockFields {
       val output: String = input(
         field = normalField,
         label = "some.message",
-        groupClasses = Seq("some-extra-class")
+        groupClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -173,6 +174,19 @@ class InputSpec extends SpecBase with MockFields {
 
       val inputElement = doc.select("input")
       inputElement must haveClass("form-control-error")
+    }
+
+    "render an input with a hidden label" in {
+
+      val output: String = input(
+        field = normalField,
+        label = "some.message",
+        hiddenLabel = true
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      doc.select("label > span") must haveClass("visually-hidden")
     }
   }
 }

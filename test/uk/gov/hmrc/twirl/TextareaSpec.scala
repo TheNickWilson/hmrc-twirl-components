@@ -85,7 +85,7 @@ class TextareaSpec extends SpecBase with MockFields {
       val output: String = textarea(
         field = normalField,
         label = "some.message",
-        labelClasses = Seq("some-extra-class")
+        labelClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -100,7 +100,7 @@ class TextareaSpec extends SpecBase with MockFields {
       val output: String = textarea(
         field = normalField,
         label = "some.message",
-        textareaClasses = Seq("some-extra-class")
+        textareaClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
@@ -114,27 +114,13 @@ class TextareaSpec extends SpecBase with MockFields {
       val output: String = textarea(
         field = normalField,
         label = "some.message",
-        groupClasses = Seq("some-extra-class")
+        groupClasses = Set("some-extra-class")
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
 
       val groupElement = doc.select(".form-group")
       groupElement must haveClass("some-extra-class")
-    }
-
-    "render a textarea with `maxLength`" in {
-
-      val output: String = textarea(
-        field = normalField,
-        label = "some.message",
-        maxLength = Some(10)
-      ).toString
-
-      val doc = Jsoup.parseBodyFragment(output)
-
-      val textareaElement = doc.select("textarea")
-      textareaElement must haveAttr("maxLength", "10")
     }
 
     "render a textarea with the right number of rows" in {
@@ -149,6 +135,19 @@ class TextareaSpec extends SpecBase with MockFields {
 
       val textareaElement = doc.select("textarea")
       textareaElement must haveAttr("rows", "10")
+    }
+
+    "render a textarea with a hidden label" in {
+
+      val output: String = textarea(
+        field       = normalField,
+        label       = "some.messages",
+        hiddenLabel = true
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      doc.select("label > span") must haveClass("visually-hidden")
     }
   }
 }
