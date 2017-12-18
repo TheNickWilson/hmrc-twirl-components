@@ -20,4 +20,5 @@ trait LayoutConfiguration {
   def indexUrl(implicit request: Request[_]): String
   def feedbackUrl(implicit request: Request[_]): String
   def setLanguageUrl(lang: Lang)(implicit request: Request[_]): String
+  def signOutUrl(implicit request: Request[_]): String
 }

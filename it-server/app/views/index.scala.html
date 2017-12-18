@@ -1,15 +1,16 @@
 @import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+@import util.User
 
 @(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
 
-@uk.gov.hmrc.twirl.layout.html.main("Test Page", config) {
+@uk.gov.hmrc.twirl.layout.html.main("Test Page", config, Some(User)) {
 
     <div class="grid-row">
         <div class="column-two-thirds">
             @back_link()
 
             @*@error_summary(
-              errors    = Seq({key:"errorID"; message="errorMessage"}),
+              form      = formInstance,
               summary   = "[Error summary]"
             )*@
 
@@ -48,7 +49,9 @@
               field         = formInstance("textInput"),
               label         = Html("[Label for text input]"),
               hint          = Some(Html("[Hint for tex input]")),
-              maxLength     = Some(255),
+              attributes    = Map(
+                  "maxLength" -> "15"
+              ),
               groupClasses  = Seq("group-one group-two group-three"),
               labelClasses  = Seq("label-one label-two label-three"),
               inputClasses  = Seq("input-one input-two input-three")

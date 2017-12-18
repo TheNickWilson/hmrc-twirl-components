@@ -26,6 +26,7 @@ class InputSpec extends SpecBase with MockFields {
       inputElement must haveAttr("id", "my_id")
       inputElement must haveAttr("name", "my.name")
       inputElement must haveAttr("value", "")
+      inputElement must haveAttr("type", "text")
       inputElement mustNot haveAttr("maxLength")
 
       val labelElement = doc.select("label")
@@ -122,18 +123,56 @@ class InputSpec extends SpecBase with MockFields {
       groupElement must haveClass("some-extra-class")
     }
 
-    "render an input with `maxLength`" in {
+    "render an input with extra attributes" in {
 
       val output: String = input(
-        field = normalField,
-        label = "some.message",
-        maxLength = Some(10)
+        field      = normalField,
+        label      = "some.message",
+        attributes = Map(
+          "maxLength" -> "10",
+          "minLength" -> "1"
+        )
       ).toString
 
       val doc = Jsoup.parseBodyFragment(output)
 
       val inputElement = doc.select("input")
       inputElement must haveAttr("maxLength", "10")
+      inputElement must haveAttr("minLength", "1")
+    }
+
+    "render an input with a different `type`" in {
+
+      val output: String = input(
+        field      = normalField,
+        label      = "some.message",
+        typeAttr    = "number"
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      val inputElement = doc.select("input")
+      inputElement must haveAttr("type", "number")
+    }
+
+    "render an inline input with errors" in {
+
+      val output: String = input(
+        field  = fieldWithError,
+        label  = "some.message",
+        inline = true
+      ).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      val groupElement = doc.select(".form-group")
+      groupElement mustNot haveClass("form-group-error")
+
+      val errorElement = doc.select(".error-message")
+      errorElement.text must be(empty)
+
+      val inputElement = doc.select("input")
+      inputElement must haveClass("form-control-error")
     }
   }
 }

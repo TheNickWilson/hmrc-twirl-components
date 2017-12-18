@@ -2,36 +2,29 @@
 
 @(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
 
-@uk.gov.hmrc.twirl.layout.html.main("Test Page", config) {
+@uk.gov.hmrc.twirl.layout.html.main("Date Input Component", config) {
 
     <div class="grid-row">
         <div class="column-two-thirds">
+
             @back_link()
 
             @error_summary(
-              errors    = formInstance.errors,
-              summary   = Some("[Error summary]")
+              form      = formInstance
             )
 
-
-            @page_header("Test Page", Some("Section name"))
+            @page_header("Date Input Component", Some("Section name"))
             
+            @form(controllers.routes.DateController.post()) {
 
-            @form(controllers.routes.DateController.index()) {
               @date(
-                  field        = formInstance("dateOfBirth"),
-                  legend       = "Date of birth",
-                  hiddenLegend = false,
-                  hint         = Some("[Hint goes here]")                  
+                  field        = formInstance("date"),
+                  legend       = "Date",
+                  hiddenLegend = true
               )
-            }
 
-
-
-
-              
               <button type="submit" class="button">Submit</button>
-            
+            }
 
         </div>
     </div>

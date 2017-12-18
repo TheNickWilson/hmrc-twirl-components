@@ -1,7 +1,14 @@
-@()
+@import uk.gov.hmrc.viewmodels.layout.User
+
+@(user: Option[User])(implicit messages: Messages)
 
 <div class="hmrc-banner" role="banner">
     <div class="organisation-logo">
         <p>HM Revenue &amp; Customs</p>
     </div>
+    @user.map { user =>
+        <div class="logged-in-status mobile-hidden">
+            <p>@messages("template.last.signed.in", user.lastLoggedIn.toString("h:mma',' EEEE d MMMM yyyy"))</p>
+        </div>
+    }
 </div>

@@ -9,4 +9,9 @@
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
 GET     /set-language/:lang         controllers.LanguageController.setLanguage(lang: Lang)
-GET     /date                       controllers.DateController.index
+
+GET     /date                       controllers.DateController.get()
+POST    /date                       controllers.DateController.post()
+
+GET     /option-other               controllers.OptionOtherController.get()
+POST    /option-other               controllers.OptionOtherController.post()

@@ -1,11 +1,17 @@
 @import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+@import uk.gov.hmrc.viewmodels.layout.User
 
-@(config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+@(config: LayoutConfiguration, user: Option[User])(implicit request: Request[_], messages: Messages)
 
 <div class="header-proposition">
     <div class="content">
         <nav id="proposition-menu">
             <a href="@config.indexUrl" id="proposition-name">@messages("service.name")</a>
+            @user.map { _ =>
+                <p id="proposition-link">
+                    <a href="@config.signOutUrl">@messages("template.sign.out")</a>
+                </p>
+            }
         </nav>
     </div>
 </div>

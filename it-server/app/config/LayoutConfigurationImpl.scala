@@ -17,4 +17,7 @@ class LayoutConfigurationImpl @Inject() (
 
   override def setLanguageUrl(lang: Lang)(implicit request: Request[_]): String =
     controllers.routes.LanguageController.setLanguage(lang).url
+
+  override def signOutUrl(implicit request: Request[_]): String =
+    controllers.routes.HomeController.index().absoluteURL()
 }

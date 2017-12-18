@@ -8,6 +8,8 @@ template.skip = Skip to main content
 template.cookies.link = Find out more about cookies
 template.cookies.message = GOV.UK uses cookies to make the site simpler.
 template.ogl.message = All content is available under the {0}, except otherwise stated
+template.sign.out = Sign out
+template.last.signed.in = You last signed in {0}
 
 footer.links.help_page.text = Help using GOV.UK
 footer.links.cookies.text = Cookies
@@ -17,6 +19,10 @@ footer.links.terms_and_conditions.text = Terms and conditions
 phase.beta = BETA
 phase.alpha = ALPHA
 phase.feedback = This is a new service – your {0}feedback{1} will help us to improve it.
+
+field.day = Day
+field.month = Month
+field.year = Year
 
 language.en = English
 language.cy = Cymraeg
