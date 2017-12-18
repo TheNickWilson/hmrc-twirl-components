@@ -1,0 +1,31 @@
+@import uk.gov.hmrc.viewmodels.layout.LayoutConfiguration
+
+@(formInstance: Form[_], config: LayoutConfiguration)(implicit request: Request[_], messages: Messages)
+
+@uk.gov.hmrc.twirl.layout.html.main("Date Input Component", config) {
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            @back_link()
+
+            @error_summary(
+              form      = formInstance
+            )
+
+            @page_header("Date Input Component", Some("Section name"))
+            
+            @form(controllers.routes.DateController.post()) {
+
+              @date(
+                  field        = formInstance("date"),
+                  legend       = "Date",
+                  hiddenLegend = true
+              )
+
+              <button type="submit" class="button">Submit</button>
+            }
+
+        </div>
+    </div>
+}

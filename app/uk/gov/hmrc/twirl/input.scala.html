@@ -2,30 +2,34 @@
         field: Field,
         label: Html,
         hint: Option[Html] = None,
-        maxLength: Option[Int] = None,
+        typeAttr: String = "text",
+        inline: Boolean = false,
+        attributes: Map[String, String] = Map.empty,
         groupClasses: Seq[String] = Seq.empty,
         labelClasses: Seq[String] = Seq("form-label-bold"),
         inputClasses: Seq[String] = Seq.empty
 )(implicit messages: Messages)
 
-<div id="@field.id-form" class="@groupClasses.mkString(" ") form-group @if(field.hasErrors){ form-group-error }">
+<div id="@field.id-form" class="@groupClasses.mkString(" ") form-group @if(field.hasErrors && !inline){ form-group-error }">
     <label for="@field.id">
         <span class="@labelClasses.mkString(" ")">@label</span>
         @hint.map { hint =>
             <span class="form-hint">@hint</span>
         }
-        @field.errors.headOption.map { error =>
-            <span class="error-message">@messages(error.message, error.args: _*)</span>
+        @if(!inline) {
+            @field.errors.headOption.map { error =>
+                <span class="error-message">@messages(error.message, error.args: _*)</span>
+            }
         }
     </label>
     <input
         class="form-control @if(field.hasErrors){form-control-error} @inputClasses.mkString(" ")"
         id="@field.id"
-        @maxLength.map { maxLength =>
-          maxLength="@maxLength"
-        }
+        @attributes.toSeq.map { case (k, v) =>
+            @k=@v
+        }.mkString(" ")
         name="@field.name"
-        type="text"
+        type="@typeAttr"
         value="@field.value"
     />
 </div>

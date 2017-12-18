@@ -1,5 +1,6 @@
 @(
         field: Field,
+        subFields: Seq[Field] = Seq.empty,
         legend: String,
         hint: Option[String] = None,
         hiddenLegend: Boolean = false,
@@ -7,6 +8,10 @@
         fieldsetClasses: Set[String] = Set.empty,
         legendClasses: Set[String] = Set("bold-small")
 )(body: Html)(implicit messages: Messages)
+
+@errors = @{
+    subFields.map(_.errors).foldLeft(field.errors){_ ++ _}
+}
 
 @_fieldsetClasses = @{
     if (inline) {
@@ -24,11 +29,11 @@
     }
 }
 
-<div class="form-group @if(field.hasErrors){ form-group-error }" id="@field.id">
+<div class="form-group @if(errors.nonEmpty){ form-group-error }" id="@field.id">
     <fieldset @if(_fieldsetClasses.nonEmpty){ class="@_fieldsetClasses.mkString(" ")" }>
         <legend>
             <span class="@_legendClasses.mkString(" ")">@messages(legend)</span>
-            @field.errors.headOption.map { error =>
+            @errors.headOption.map { error =>
               <span class="error-message">@messages(error.message, error.args: _*)</span>
             }
             @hint.map { hint =>

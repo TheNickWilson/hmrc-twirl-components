@@ -1,12 +1,13 @@
 package uk.gov.hmrc.twirl
 
 import org.jsoup.Jsoup
+import play.api.data.Form
 import play.twirl.api.Html
 import uk.gov.hmrc.twirl.html.fieldset
 
 class FieldsetSpec extends SpecBase with MockFields {
 
-  "radios_nested" must {
+  "fieldset" must {
 
     "render a default fieldset" in {
 
@@ -35,12 +36,22 @@ class FieldsetSpec extends SpecBase with MockFields {
 
     "render a fieldset with errors" in {
 
+      val form = {
+        import play.api.data.Forms._
+        Form(
+          "foo" -> text
+        ).withError("foo", "some error")
+      }
+
       val output: String = fieldset(
-        field = fieldWithError,
+        field = form("foo"),
         legend = "some.message"
       )(Html("""<div id="test" />""")).toString
 
       val doc = Jsoup.parseBodyFragment(output)
+
+      val fieldsetElement = doc.select("#foo")
+      fieldsetElement must haveClass("form-group-error")
 
       val errorElement = doc.select(".error-message")
       errorElement.text mustEqual "some error"
@@ -114,6 +125,30 @@ class FieldsetSpec extends SpecBase with MockFields {
 
       val legendElement = doc.select("legend > span:first-child")
       legendElement must haveClass("visually-hidden")
+    }
+
+    "render a fieldset with an error on a sub field" in {
+
+      val form = {
+        import play.api.data.Forms._
+        Form(
+          "foo" -> single("bar" -> text)
+        ).withError("foo.bar", "some error")
+      }
+
+      val output: String = fieldset(
+        field = form("foo"),
+        subFields = Seq(form("foo")("bar")),
+        legend = "some.message"
+      )(Html("""<div id="test" />""")).toString
+
+      val doc = Jsoup.parseBodyFragment(output)
+
+      val fieldsetElement = doc.select("#foo")
+      fieldsetElement must haveClass("form-group-error")
+
+      val errorElement = doc.select(".error-message")
+      errorElement.text mustEqual "some error"
     }
   }
 }

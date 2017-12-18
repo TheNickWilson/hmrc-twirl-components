@@ -1,5 +1,6 @@
 @(
         field: Field,
+        subFields: Seq[Field] = Seq.empty,
         legend: String,
         options: Seq[InputOption],
         hiddenLegend: Boolean = false,
@@ -11,6 +12,7 @@
 
 @fieldset(
     field = field,
+    subFields = subFields,
     legend = legend,
     hiddenLegend = hiddenLegend,
     inline = inline,

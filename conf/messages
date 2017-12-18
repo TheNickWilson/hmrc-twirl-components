@@ -20,5 +20,9 @@ phase.beta = BETA
 phase.alpha = ALPHA
 phase.feedback = This is a new service – your {0}feedback{1} will help us to improve it.
 
+field.day = Day
+field.month = Month
+field.year = Year
+
 language.en = English
 language.cy = Cymraeg

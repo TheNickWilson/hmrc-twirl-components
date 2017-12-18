@@ -43,6 +43,8 @@ lazy val itServer = (project in file("it-server"))
       "play.api.i18n._",
       "util.PathBindables._"
     ),
-    libraryDependencies +=
-      "com.typesafe.play" %% "filters-helpers" % PlayVersion.current
+    libraryDependencies ++= Seq(
+      "com.typesafe.play" %% "filters-helpers" % PlayVersion.current,
+      "uk.gov.hmrc" %% "play-conditional-form-mapping" % "0.2.0"
+    )
   )
